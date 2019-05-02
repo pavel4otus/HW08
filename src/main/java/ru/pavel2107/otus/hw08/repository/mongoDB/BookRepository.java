@@ -1,6 +1,5 @@
 package ru.pavel2107.otus.hw08.repository.mongoDB;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import ru.pavel2107.otus.hw08.domain.Book;
@@ -14,4 +13,5 @@ public interface BookRepository extends CrudRepository<Book, String> {
     List<Book> findByName( String name);
 
     List<Book> findBookByAuthorId( String AuthorId);
+
 }

@@ -12,7 +12,7 @@ public interface BookService {
 
     List<Book> findByName(String name);
     List<Book> findBookByAuthorId( String authorID);
-    Book getByISBN( String ISBN);
+    Book findByISBN( String ISBN);
     List<Book> findAll();
 
 }

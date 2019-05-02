@@ -33,9 +33,12 @@ public class BookServiceImplTest {
     }
 
     @Test
-    public void getByISBN() {
-
-
+    public void findByISBN() {
+        Book book = createTestBook();
+        book.setIsbn( "333");
+        service.save( book);
+        book = service.findByISBN( book.getIsbn());
+        assertNotEquals( null, book);
     }
 
     @Test
@@ -52,7 +55,6 @@ public class BookServiceImplTest {
         book.setAuthor( author);
         book = service.save( book);
         assertEquals( "test", book.getName());
-
     }
 
     @Test
@@ -62,7 +64,7 @@ public class BookServiceImplTest {
         book = service.save( book);
         service.delete( book.getId());
         book = service.find( book.getId());
-        assertEquals( null, book);
+        assertNull( book);
     }
 
     @Test
@@ -70,7 +72,7 @@ public class BookServiceImplTest {
         Book book = createTestBook();
         book = service.save( book);
         book = service.find( book.getId());
-        assertNotEquals( null, book);
+        assertNotNull( book);
     }
 
     @Test
@@ -79,7 +81,6 @@ public class BookServiceImplTest {
         book = service.save( book);
         List<Book> list = service.findByName( book.getName());
         assertNotEquals( 0, list.size());
-
     }
 
     @Test
@@ -90,7 +91,7 @@ public class BookServiceImplTest {
         author.setId( "1");
 
         book.setAuthor( author);
-        book = service.save( book);
+        service.save( book);
         List<Book> list = service.findBookByAuthorId( author.getId());
         assertNotEquals( 0, list.size());
     }

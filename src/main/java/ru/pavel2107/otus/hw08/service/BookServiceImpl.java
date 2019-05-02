@@ -20,7 +20,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book getByISBN(String ISBN) {
+    public Book findByISBN(String ISBN) {
         return bookRepository.findByIsbn( ISBN);
     }
 
