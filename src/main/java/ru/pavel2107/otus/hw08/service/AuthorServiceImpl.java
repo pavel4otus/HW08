@@ -3,7 +3,9 @@ package ru.pavel2107.otus.hw08.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.pavel2107.otus.hw08.domain.Author;
+import ru.pavel2107.otus.hw08.domain.Book;
 import ru.pavel2107.otus.hw08.repository.mongoDB.AuthorRepository;
+import ru.pavel2107.otus.hw08.repository.mongoDB.BookRepository;
 
 import java.util.List;
 
@@ -12,10 +14,13 @@ public class AuthorServiceImpl implements AuthorService {
 
     private AuthorRepository repository;
 
+    private BookRepository bookRepository;
 
     @Autowired
-    public AuthorServiceImpl( AuthorRepository repository){
-        this.repository = repository;
+    public AuthorServiceImpl( AuthorRepository repository, BookRepository bookRepository){
+
+        this.repository  = repository;
+        this.bookRepository = bookRepository;
     }
 
     @Override
@@ -24,16 +29,19 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public void delete(String ID) {
-        Author author = find( ID);
+    public void delete(String id) {
+        Author author = find( id);
         if( author != null) {
-            repository.delete(author);
+            List<Book> bookList = bookRepository.findBookByAuthorId( id);
+            if( bookList.size() == 0) {
+                repository.delete(author);
+            }
         }
     }
 
     @Override
-    public Author find(String ID) {
-        return repository.findById(ID).orElse(null);
+    public Author find(String id) {
+        return repository.findById(id).orElse(null);
     }
 
     @Override

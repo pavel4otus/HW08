@@ -7,12 +7,12 @@ import java.util.List;
 
 public interface BookService {
     Book save(Book author);
-    void delete( String ID);
-    Book find( String ID);
+    void delete( String id);
+    Book find( String id);
 
     List<Book> findByName(String name);
     List<Book> findBookByAuthorId( String authorID);
-    Book findByISBN( String ISBN);
+    Book findByISBN( String isbn);
     List<Book> findAll();
 
 }

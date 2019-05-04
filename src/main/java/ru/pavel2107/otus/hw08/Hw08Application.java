@@ -15,7 +15,7 @@ public class Hw08Application {
 
     public static void main(String[] args)  throws Exception {
         ApplicationContext context = SpringApplication.run(Hw08Application.class, args);
-
+/*
         AuthorRepository authorRepository = context.getBean( AuthorRepository.class);
         Author author = new Author();
         author.setId("1");
@@ -23,6 +23,7 @@ public class Hw08Application {
         authorRepository.save( author);
 
         List<Author> list= authorRepository.findByName( "king");
+*/
 
     }
 

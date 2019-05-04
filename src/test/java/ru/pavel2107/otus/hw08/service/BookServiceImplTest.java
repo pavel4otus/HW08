@@ -29,6 +29,17 @@ public class BookServiceImplTest {
         book.setPublicationPlace( "place");
         book.setPublishingHouse( "hos");
         book.setPublicationYear(1200);
+
+        Genre  genre  = new Genre();
+        genre.setId( "1");
+        genre.setName( "FANTASY");
+
+        Author author = new Author();
+        author.setId( "1");
+        author.setName( "KING");
+
+        book.setGenre( genre);
+        book.setAuthor( author);
         return book;
     }
 
@@ -43,16 +54,7 @@ public class BookServiceImplTest {
 
     @Test
     public void save() {
-        Genre  genre  = new Genre();
-        genre.setId( "1");
-
-        Author author = new Author();
-        author.setId( "1");
-
         Book book = createTestBook();
-
-        book.setGenre( genre);
-        book.setAuthor( author);
         book = service.save( book);
         assertEquals( "test", book.getName());
     }

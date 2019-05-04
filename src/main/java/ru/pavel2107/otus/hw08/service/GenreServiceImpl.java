@@ -2,7 +2,9 @@ package ru.pavel2107.otus.hw08.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.pavel2107.otus.hw08.domain.Book;
 import ru.pavel2107.otus.hw08.domain.Genre;
+import ru.pavel2107.otus.hw08.repository.mongoDB.BookRepository;
 import ru.pavel2107.otus.hw08.repository.mongoDB.GenreRepository;
 
 import java.util.List;
@@ -12,10 +14,14 @@ public class GenreServiceImpl implements GenreService {
 
 
     private GenreRepository repository;
+    private BookRepository  bookRepository;
+
 
     @Autowired
-    public GenreServiceImpl(GenreRepository repository){
+    public GenreServiceImpl(GenreRepository repository, BookRepository bookRepository){
+
         this.repository = repository;
+        this.bookRepository = bookRepository;
     }
 
     @Override
@@ -24,16 +30,19 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
-    public void delete(String ID) {
-        Genre g = find( ID);
+    public void delete(String id) {
+        Genre g = find( id);
         if( g != null) {
-            repository.delete( g);
+            List<Book> bookList = bookRepository.findBookByGenreId( id);
+            if( bookList.size() == 0) {
+                repository.delete(g);
+            }
         }
     }
 
     @Override
-    public Genre find(String ID) {
-        return repository.findById( ID).orElse( null);
+    public Genre find(String id) {
+        return repository.findById( id).orElse( null);
     }
 
     @Override
