@@ -1,6 +1,9 @@
 package ru.pavel2107.otus.hw08.domain;
 
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 
 
@@ -13,41 +16,7 @@ import java.time.LocalDateTime;
 
 public class Comment {
 
-    private String name;
-    private LocalDateTime dateTime;
-    private String comment;
-
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public LocalDateTime getDateTime() {
-        return dateTime;
-    }
-
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-    @Override
-    public String toString() {
-        return "Comment{" +
-                ", name='" + name + '\'' +
-                ", dateTime=" + dateTime +
-                ", comment='" + comment + '\'' +
-                '}';
-    }
+    @Setter @Getter private String name;
+    @Setter @Getter private LocalDateTime dateTime;
+    @Setter @Getter private String comment;
 }

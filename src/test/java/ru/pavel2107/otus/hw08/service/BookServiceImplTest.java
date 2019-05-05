@@ -5,7 +5,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.shell.jline.InteractiveShellApplicationRunner;
+import org.springframework.shell.jline.ScriptShellApplicationRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 import ru.pavel2107.otus.hw08.domain.*;
 
@@ -14,13 +17,16 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
-@Import({ BookServiceImpl.class})
 @DisplayName( "MongoDB. Сервис книг")
-@DataMongoTest
+@SpringBootTest(
+        properties = {
+                InteractiveShellApplicationRunner.SPRING_SHELL_INTERACTIVE_ENABLED + "=false",
+                ScriptShellApplicationRunner.SPRING_SHELL_SCRIPT_ENABLED + "=false"
+        }
+)
 public class BookServiceImplTest {
 
     @Autowired BookService service;
-
 
     private Book createTestBook(){
         Book book = new Book();
@@ -60,7 +66,7 @@ public class BookServiceImplTest {
     }
 
     @Test
-    public void delete() {
+    public void delete() throws Exception{
 
         Book book = createTestBook();
         book = service.save( book);
@@ -105,6 +111,4 @@ public class BookServiceImplTest {
         List<Book>list = service.findAll();
         assertNotEquals( 0, list.size());
     }
-
-
 }

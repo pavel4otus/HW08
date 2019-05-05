@@ -1,6 +1,7 @@
 package ru.pavel2107.otus.hw08.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import ru.pavel2107.otus.hw08.domain.Author;
 import ru.pavel2107.otus.hw08.domain.Book;
@@ -29,11 +30,12 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(String id) throws Exception{
         Author author = find( id);
         if( author != null) {
-            List<Book> bookList = bookRepository.findBookByAuthorId( id);
-            if( bookList.size() == 0) {
+            if( bookRepository.existsByAuthorId( id)) {
+                throw new Exception( "Author #" + id + " has books");
+            } else {
                 repository.delete(author);
             }
         }

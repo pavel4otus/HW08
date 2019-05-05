@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 import ru.pavel2107.otus.hw08.domain.Author;
 import ru.pavel2107.otus.hw08.domain.Book;
@@ -21,22 +22,20 @@ import static org.junit.Assert.*;
 public class BookRepositoryTest {
 
     @Autowired private BookRepository   repository;
-    @Autowired private AuthorRepository authorRepository;
-    @Autowired private GenreRepository  genreRepository;
+    @Autowired private MongoTemplate mongoTemplate;
+
 
     @Before
     public  void beforeTests(){
-
         Genre genre = new Genre();
         genre.setName( "FANTASY-TEST");
         genre.setId( "777");
-        genreRepository.save( genre);
-
+        mongoTemplate.save( genre);
 
         Author author = new Author();
         author.setName( "KING-TEST");
         author.setId( "888");
-        authorRepository.save( author);
+        mongoTemplate.save( author);
 
         Book book = new Book();
         book.setId( "999");

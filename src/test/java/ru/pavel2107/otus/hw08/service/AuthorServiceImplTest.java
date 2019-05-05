@@ -7,6 +7,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.shell.jline.InteractiveShellApplicationRunner;
+import org.springframework.shell.jline.ScriptShellApplicationRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 import ru.pavel2107.otus.hw08.domain.Author;
 import ru.pavel2107.otus.hw08.repository.mongoDB.AuthorRepository;
@@ -22,12 +26,16 @@ import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
 @DisplayName( "MongoDB. Сервис авторов")
-@DataMongoTest
-
+@SpringBootTest(
+    properties = {
+        InteractiveShellApplicationRunner.SPRING_SHELL_INTERACTIVE_ENABLED + "=false",
+        ScriptShellApplicationRunner.SPRING_SHELL_SCRIPT_ENABLED + "=false"
+    }
+)
 public class AuthorServiceImplTest {
 
-    @Mock AuthorRepository authorRepository;
-    @Mock BookRepository   bookRepository;
+    @MockBean AuthorRepository authorRepository;
+    @MockBean BookRepository   bookRepository;
 
     AuthorService authorService;
 

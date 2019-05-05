@@ -7,7 +7,7 @@ import java.util.List;
 public interface GenreService {
 
     Genre save( Genre genre);
-    void delete( String id);
+    void delete( String id) throws Exception;
     Genre find(String id);
     List<Genre> findAll();
 

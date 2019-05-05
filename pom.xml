@@ -6,7 +6,7 @@
     <groupId>ru.pavel2107.otus</groupId>
     <artifactId>hw08</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>hw05</name>
+    <name>hw08</name>
 
 
     <parent>
@@ -60,6 +60,14 @@
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
 
+
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.6</version>
+            <scope>provided</scope>
+        </dependency>
 
 
     </dependencies>

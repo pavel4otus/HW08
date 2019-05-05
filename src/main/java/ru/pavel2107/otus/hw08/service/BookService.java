@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface BookService {
     Book save(Book author);
-    void delete( String id);
+    void delete( String id) throws Exception;
     Book find( String id);
 
     List<Book> findByName(String name);

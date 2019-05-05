@@ -30,11 +30,13 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(String id) throws Exception{
         Genre g = find( id);
         if( g != null) {
-            List<Book> bookList = bookRepository.findBookByGenreId( id);
-            if( bookList.size() == 0) {
+            if( bookRepository.existsByGenreId( id)) {
+                throw new Exception( "There are books for genre #" + id);
+            }
+            else{
                 repository.delete(g);
             }
         }
