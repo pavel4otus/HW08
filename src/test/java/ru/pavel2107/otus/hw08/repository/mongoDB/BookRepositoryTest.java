@@ -48,7 +48,7 @@ public class BookRepositoryTest {
         book.setAuthor( author);
         book.setGenre( genre);
 
-        repository.save( book);
+        mongoTemplate.save( book);
     }
 
 
